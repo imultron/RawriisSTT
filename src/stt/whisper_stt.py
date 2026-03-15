@@ -91,7 +91,8 @@ def _out(obj):
     sys.stdout.buffer.flush()
 
 try:
-    model = WhisperModel(mp, device=dev, compute_type="float32")
+    compute_type = "float16" if dev == "cuda" else "int8"
+    model = WhisperModel(mp, device=dev, compute_type=compute_type)
     _out({"status": "loaded"})
 except Exception as exc:
     _out({"status": "error", "message": str(exc)})
