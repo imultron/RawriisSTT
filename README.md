@@ -23,9 +23,9 @@ RawriisSTT listens to your microphone and sends your speech to the VRChat chatbo
 ## Showcase
 
 <p align="center">
-  <a href="https://youtu.be/-ZfZ6o1JJAs">
-    <img src="https://img.youtube.com/vi/-ZfZ6o1JJAs/0.jpg" width="600" alt="RawriisSTT Demo">
-  </a>
+  <video width="700" controls>
+    <source src="docs/showcase.mp4" type="video/mp4">
+  </video>
 </p>
 
 ## Documentation
