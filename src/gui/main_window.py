@@ -35,6 +35,8 @@ from ..audio.devices import AudioDevice, enumerate_all_devices, invalidate_devic
 from ..config.settings import AppSettings, save_settings
 from ..osc.vrchat_osc import VRChatOSC
 from ..stt.base import STTEngine, STTResult
+from ..updater import UpdateChecker
+from ..version import __version__, RELEASES_URL
 
 logger = logging.getLogger(__name__)
 
@@ -425,6 +427,7 @@ class MainWindow(QMainWindow):
         self._refresh_preset_btn()
         self._start_global_hotkeys()
         self._start_steamvr_input()
+        self._start_update_check()
 
     # ------------------------------------------------------------------ UI build
 
@@ -443,10 +446,19 @@ class MainWindow(QMainWindow):
         title_font.setBold(True)
         title_lbl.setFont(title_font)
         title_row.addWidget(title_lbl)
-        version_lbl = QLabel("v1.0.0")
+        version_lbl = QLabel(f"v{__version__}")
         version_lbl.setStyleSheet("color: #888888; font-size: 11px;")
         version_lbl.setContentsMargins(4, 0, 0, 0)
         title_row.addWidget(version_lbl)
+        self._lbl_update = QLabel()
+        self._lbl_update.setStyleSheet(
+            "color: #f0a500; font-size: 11px; text-decoration: underline;"
+        )
+        self._lbl_update.setCursor(Qt.CursorShape.PointingHandCursor)
+        self._lbl_update.setContentsMargins(8, 0, 0, 0)
+        self._lbl_update.hide()
+        self._lbl_update.mousePressEvent = self._open_release_page
+        title_row.addWidget(self._lbl_update)
         title_row.addStretch()
         self._btn_save_preset = QPushButton("Save Preset")
         self._btn_save_preset.setFixedWidth(90)
@@ -2366,6 +2378,22 @@ class MainWindow(QMainWindow):
         save_settings(self.settings)  # always write on exit
         super().closeEvent(event)
         QApplication.quit()
+
+    # ---------------------------------------------------------------- update check
+
+    def _start_update_check(self) -> None:
+        self._update_checker = UpdateChecker()
+        self._update_checker.update_available.connect(self._on_update_available)
+        self._update_checker.start()
+
+    def _on_update_available(self, tag: str, url: str) -> None:
+        self._update_url = url
+        self._lbl_update.setText(f"Update available: {tag}")
+        self._lbl_update.show()
+
+    def _open_release_page(self, *_) -> None:
+        import webbrowser
+        webbrowser.open(getattr(self, "_update_url", RELEASES_URL))
 
 
 # ------------------------------------------------------------------ Utilities
