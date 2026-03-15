@@ -16,7 +16,7 @@
 
 ---
 
-RawriisSTT listens to your microphone and sends your words to the **VRChat chatbox** over OSC - no subscription required. Pick from several local or cloud speech engines, bind push-to-talk to a keyboard key or a **SteamVR controller button**, and optionally have responses read back through a text-to-speech engine of your choice.
+RawriisSTT listens to your microphone and sends your speech to the VRChat chatbox over OSC — no subscription required. Designed for minimal performance impact, it uses efficient engines like faster-whisper for quick, local transcription. Choose from multiple local or cloud speech engines, bind push-to-talk to a keyboard key or SteamVR controller button, and optionally have messages read back through the text-to-speech voice of your choice.
 
 ---
 
