@@ -218,8 +218,21 @@ class SettingsDialog(QDialog):
         vad_group = QGroupBox("Voice Activity Detection (VAD)")
         vad_form = QFormLayout(vad_group)
 
+        try:
+            import webrtcvad as _wv  # noqa: F401
+            _webrtcvad_ok = True
+        except Exception:
+            _webrtcvad_ok = False
+
         self._chk_vad = QCheckBox("Enable VAD (reduces false positives)")
-        self._chk_vad.setChecked(self.settings.vad_enabled)
+        self._chk_vad.setChecked(self.settings.vad_enabled and _webrtcvad_ok)
+        if not _webrtcvad_ok:
+            self._chk_vad.setEnabled(False)
+            vad_group.setToolTip(
+                "webrtcvad is not installed or failed to import.\n"
+                "Fix: pip install \"setuptools<81\" then pip install webrtcvad\n"
+                "(setuptools>=81 removed pkg_resources which webrtcvad requires)"
+            )
         vad_form.addRow(self._chk_vad)
 
         self._vad_aggr = QSpinBox()

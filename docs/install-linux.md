@@ -139,6 +139,12 @@ SteamVR runs natively on Linux via Steam. RawriisSTT will detect it automaticall
   ```
 - WSL1 has no audio support at all — upgrade to WSL2.
 
+**VAD mode does nothing / webrtcvad silently fails to import on Python 3.12**
+- `setuptools>=81` removed `pkg_resources`, which `webrtcvad` depends on. The launcher now pins `setuptools<81` automatically. If you installed manually, fix it with:
+  ```bash
+  pip install "setuptools<81"
+  ```
+
 **`ModuleNotFoundError: No module named 'faster_whisper'` when launching Whisper**
 - This means the Whisper subprocess launched a different Python interpreter than the one with your packages installed. Run the app via `python3 launcher.py` (not `python3 main.py`) to ensure packages are installed into and used from the same interpreter.
 

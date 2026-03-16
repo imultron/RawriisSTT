@@ -20,6 +20,10 @@ import os
 # (import_name, pip_spec, optional)
 # optional=True means we warn but don't abort if install fails (e.g. platform-specific)
 PACKAGES: list[tuple[str, str, bool]] = [
+    # webrtcvad (and others) depend on pkg_resources from setuptools.
+    # setuptools>=81 removed pkg_resources, breaking imports on Python 3.12+.
+    # Must be first so it's pinned before any package that needs pkg_resources.
+    ("setuptools",                     "setuptools<81",                         False),
     ("PyQt6",                          "PyQt6>=6.6.0",                          False),
     ("faster_whisper",                 "faster-whisper>=1.0.0",                 False),
     ("azure.cognitiveservices.speech", "azure-cognitiveservices-speech>=1.35.0", True),

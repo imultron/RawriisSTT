@@ -679,6 +679,22 @@ class MainWindow(QMainWindow):
         self._radio_ptt_toggle = QRadioButton("PTT Toggle")
         self._radio_vad.setChecked(True)
 
+        try:
+            import webrtcvad as _wrtcvad  # noqa: F401
+            _webrtcvad_ok = True
+        except Exception:
+            _webrtcvad_ok = False
+        if not _webrtcvad_ok:
+            self._radio_vad.setEnabled(False)
+            self._radio_vad.setToolTip(
+                "webrtcvad is not installed or failed to import.\n"
+                "Fix: pip install \"setuptools<81\" then pip install webrtcvad\n"
+                "(setuptools>=81 removed pkg_resources which webrtcvad requires)"
+            )
+            if self.settings.whisper_input_mode == "vad":
+                self._radio_ptt_hold.setChecked(True)
+                self.settings.whisper_input_mode = "ptt_hold"
+
         self._btn_group_mode = QButtonGroup()
         self._btn_group_mode.addButton(self._radio_vad, 0)
         self._btn_group_mode.addButton(self._radio_ptt_hold, 1)
