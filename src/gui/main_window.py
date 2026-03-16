@@ -1890,11 +1890,11 @@ class MainWindow(QMainWindow):
                     if _is_wsl:
                         _msg = (
                             "No audio input device was found.\n\n"
-                            "WSL2 on Windows 11 provides audio via WSLg automatically.\n"
-                            "Do not install standalone pulseaudio — it conflicts with WSLg.\n\n"
-                            "Open a fresh WSL terminal and try again. If the issue persists:\n"
-                            "  export PULSE_SERVER=unix:/mnt/wslg/runtime-dir/pulse/native\n"
-                            "  python3 launcher.py"
+                            "WSL2 on Windows 11 provides audio via WSLg automatically — "
+                            "open a fresh WSL terminal and try again.\n\n"
+                            "If you installed standalone pulseaudio, remove it:\n"
+                            "  sudo apt remove --purge pulseaudio\n\n"
+                            "See docs/install-linux.md for full WSL audio troubleshooting."
                         )
                     else:
                         _msg = (

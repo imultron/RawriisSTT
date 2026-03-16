@@ -19,6 +19,16 @@ from .whisper_models import get_model_path
 logger = logging.getLogger(__name__)
 
 
+def _resample_to_16k(data: np.ndarray, from_rate: int) -> np.ndarray:
+    """Linearly resample int16 mono audio from from_rate to 16000 Hz."""
+    if from_rate == SAMPLE_RATE:
+        return data
+    n_out = int(len(data) * SAMPLE_RATE / from_rate)
+    x_old = np.linspace(0, 1, len(data), endpoint=False)
+    x_new = np.linspace(0, 1, n_out, endpoint=False)
+    return np.interp(x_new, x_old, data.flatten()).astype(np.int16).reshape(-1, 1)
+
+
 def _audio_stream_error(exc: Exception) -> RuntimeError:
     """Convert a PortAudioError into a user-friendly message, with WSL-specific hints."""
     msg = str(exc)
@@ -410,21 +420,32 @@ class WhisperSTT(STTEngine):
     def _run_capture(self, device_index: Optional[int], language: str) -> None:
         import sounddevice as sd
 
+        # Open at the device's native sample rate to avoid paInvalidSampleRate (-9997)
+        # on Linux devices that don't support 16kHz directly (e.g. 44100/48000 Hz).
+        # Audio is resampled to SAMPLE_RATE in the callback before queuing.
+        if device_index is not None:
+            native_rate = int(sd.query_devices(device_index)["default_samplerate"])
+        else:
+            default_idx = sd.default.device[0]
+            native_rate = int(sd.query_devices(default_idx)["default_samplerate"]) if default_idx >= 0 else SAMPLE_RATE
+
+        native_blocksize = int(native_rate * BLOCK_DURATION_MS / 1000)
+
         vad = self._vad  # created once at load_model time
 
         def audio_callback(indata: np.ndarray, frames: int, time_info, status) -> None:
             if status:
                 logger.debug("sounddevice status: %s", status)
             try:
-                self._audio_queue.put_nowait(indata.copy())
+                self._audio_queue.put_nowait(_resample_to_16k(indata, native_rate))
             except queue.Full:
                 pass  # drop frame; transcription is falling behind
 
         kwargs = dict(
-            samplerate=SAMPLE_RATE,
+            samplerate=native_rate,
             channels=1,
             dtype="int16",
-            blocksize=BLOCK_SIZE,
+            blocksize=native_blocksize,
             callback=audio_callback,
         )
         if device_index is not None:
