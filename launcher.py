@@ -27,7 +27,11 @@ PACKAGES: list[tuple[str, str, bool]] = [
     ("speech_recognition",             "SpeechRecognition>=3.10.0",             True),
     ("pythonosc",                      "python-osc>=1.8.0",                     False),
     ("sounddevice",                    "sounddevice>=0.4.6",                    False),
-    ("pyaudio",                        "PyAudio>=0.2.14",                       False),
+    # PyAudio is intentionally excluded from PACKAGES on Linux — see bootstrap() below.
+    # pip-built PyAudio links against a different PortAudio than sounddevice's bundled one,
+    # causing heap corruption (malloc: unsorted double linked list corrupted) at runtime.
+    # Users must install python3-pyaudio from their distro's package manager instead.
+    *([("pyaudio", "PyAudio>=0.2.14", False)] if sys.platform != "linux" else []),
     ("webrtcvad",                      "webrtcvad>=2.0.10",                     False),
     ("numpy",                          "numpy>=1.24.0",                         False),
     ("platformdirs",                   "platformdirs>=4.0.0",                   False),
@@ -56,6 +60,15 @@ def _install(pip_spec: str) -> bool:
 
 
 def bootstrap() -> None:
+    if sys.platform == "linux" and not _is_importable("pyaudio"):
+        print(
+            "Note: System Speech requires python3-pyaudio from your package manager.\n"
+            "  Debian/Ubuntu:  sudo apt install python3-pyaudio\n"
+            "  Arch/Manjaro:   sudo pacman -S python-pyaudio\n"
+            "  Fedora:         sudo dnf install python3-pyaudio\n"
+            "Other STT engines (Whisper, Vosk, Azure) do not require PyAudio.\n"
+        )
+
     missing_required: list[str] = []
     missing_optional: list[str] = []
 

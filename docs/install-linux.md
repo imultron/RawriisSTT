@@ -15,22 +15,24 @@ RawriisSTT runs from source on Linux. There is no pre-built Linux binary - use t
 
 ## System Dependencies
 
-Install PortAudio before running the launcher, otherwise PyAudio will fail to install:
+Most packages install automatically via `launcher.py`. However, **PyAudio must be installed from your distro's package manager** on Linux — the pip version links against a different PortAudio build than sounddevice, which causes a crash at runtime. This only affects the **System Speech** and **Vosk** engines; Whisper and Azure work without it.
 
 **Debian / Ubuntu / Mint:**
 ```bash
-sudo apt install portaudio19-dev python3-dev
+sudo apt install python3-pyaudio
 ```
 
 **Arch / Manjaro:**
 ```bash
-sudo pacman -S portaudio
+sudo pacman -S python-pyaudio
 ```
 
 **Fedora:**
 ```bash
-sudo dnf install portaudio-devel
+sudo dnf install python3-pyaudio
 ```
+
+If you only plan to use Whisper (recommended), you can skip the above entirely.
 
 ---
 
@@ -113,8 +115,21 @@ SteamVR runs natively on Linux via Steam. RawriisSTT will detect it automaticall
 
 ## Troubleshooting
 
+**`ModuleNotFoundError: No module named 'faster_whisper'` when launching Whisper**
+- This means the Whisper subprocess launched a different Python interpreter than the one with your packages installed. Run the app via `python3 launcher.py` (not `python3 main.py`) to ensure packages are installed into and used from the same interpreter.
+
+**System Speech crashes with `malloc(): unsorted double linked list corrupted`**
+- This is caused by pip-installed PyAudio conflicting with sounddevice's bundled PortAudio. Install PyAudio from your package manager instead (see System Dependencies above) and do not `pip install PyAudio`.
+
 **`No module named 'PyAudio'` during install**
-- Install PortAudio system package first (see System Dependencies above), then re-run `launcher.py`.
+- Install PyAudio from your package manager (see System Dependencies above). Do not use pip for PyAudio on Linux.
+
+**Keyboard PTT hotkey doesn't work / "requires read access to /dev/input"**
+- Add your user to the `input` group, then log out and back in:
+  ```bash
+  sudo usermod -aG input $USER
+  ```
+- Alternatively, use SteamVR controller bindings for PTT instead of a keyboard hotkey.
 
 **Microphone not detected**
 - Check PipeWire/PulseAudio is running: `pactl info`

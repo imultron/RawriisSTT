@@ -36,6 +36,13 @@ def _find_python() -> str:
       4. PATH — but skip Windows Store stubs (WindowsApps\\python*.exe)
       5. sys.executable as last resort
     """
+    # When running from source, sys.executable IS the interpreter that has all
+    # packages installed (launcher.py used it to pip-install everything).
+    # Only run discovery logic in frozen PyInstaller builds where sys.executable
+    # is the bundle exe, not a Python interpreter.
+    if not getattr(sys, "frozen", False):
+        return sys.executable
+
     prefixes = [sys.base_exec_prefix, sys.exec_prefix]
 
     # 1. Read pyvenv.cfg to get the original Python home directory
