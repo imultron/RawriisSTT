@@ -31,7 +31,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from ..audio.devices import AudioDevice, enumerate_all_devices, invalidate_device_cache
+from ..audio.devices import AudioDevice, enumerate_all_devices, invalidate_device_cache, reinitialize_portaudio
 from ..audio.linux_virtual_cable import (
     is_supported as _vc_supported,
     exists as _vc_exists,
@@ -1515,6 +1515,9 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def _on_create_virtual_cable(self) -> None:
         from ..audio.linux_virtual_cable import create as _vc_create
+        # Pa_Terminate() must not be called while a stream is open
+        if self._worker is not None:
+            self._stop_listening()
         self._btn_create_cable.setEnabled(False)
         try:
             _vc_create()
@@ -1524,6 +1527,10 @@ class MainWindow(QMainWindow):
             return
         if self._lbl_cable_status:
             self._lbl_cable_status.setText("Virtual cable created.")
+        QTimer.singleShot(300, self._refresh_after_cable_create)
+
+    def _refresh_after_cable_create(self) -> None:
+        reinitialize_portaudio()
         self._populate_all_devices()
         for i in range(self._cmb_cable.count()):
             if _VC_CABLE_NAME in self._cmb_cable.itemText(i):

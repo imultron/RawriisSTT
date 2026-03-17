@@ -68,6 +68,22 @@ def find_device_by_name(name: str) -> AudioDevice | None:
     return None
 
 
+def reinitialize_portaudio() -> None:
+    """Force PortAudio to re-scan devices.
+
+    Required on Linux after a new PulseAudio/PipeWire sink is created at runtime —
+    sounddevice's device list is built once at Pa_Initialize() time and won't see
+    new sinks until PortAudio is restarted. Must only be called when no stream is open.
+    """
+    try:
+        import sounddevice as _sd
+        _sd._terminate()
+        _sd._initialize()
+    except Exception:
+        pass
+    invalidate_device_cache()
+
+
 def default_input_device() -> AudioDevice | None:
     try:
         import sounddevice as sd
