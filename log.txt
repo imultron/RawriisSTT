@@ -1,0 +1,15 @@
+Note: System Speech requires python3-pyaudio from your package manager.
+  Debian/Ubuntu:  sudo apt install python3-pyaudio
+  Arch/Manjaro:   sudo pacman -S python-pyaudio
+  Fedora:         sudo dnf install python3-pyaudio
+Other STT engines (Whisper, Vosk, Azure) do not require PyAudio.
+
+16:25:52 [INFO] src.osc.vrchat_osc: OSC client connected to 127.0.0.1:9002
+16:25:53 [INFO] src.input.steamvr_input: SteamVR image_path set to: /home/ultron/Downloads/Testing/test/RawriisSST/RawriisIcon.png (exists=True)
+16:25:53 [INFO] src.input.steamvr_input: SteamVR exe dir resolved to: /home/ultron/Downloads/Testing/test/RawriisSST
+16:25:53 [INFO] src.input.steamvr_input: Patched vrmanifest written
+16:25:53 [INFO] src.input.steamvr_input: SteamVRInputManager started
+16:26:24 [INFO] src.stt.whisper_stt: Loading Whisper model 'tiny' on cpu from /home/ultron/.cache/huggingface/hub/models--Systran--faster-whisper-tiny/snapshots/d90ca5fe260221311c53c58e660288d3deb8d356…
+16:26:24 [INFO] src.stt.whisper_stt: Whisper subprocess python: /home/ultron/Downloads/Testing/test/bin/python3
+16:26:26 [INFO] src.stt.whisper_stt: Whisper model loaded (subprocess pid=99424).
+16:26:26 [INFO] src.gui.main_window: Whisper model ready.

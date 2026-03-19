@@ -1,0 +1,307 @@
+19:50:51 [INFO] src.osc.vrchat_osc: OSC client connected to 127.0.0.1:9002
+19:50:52 [INFO] src.input.steamvr_input: SteamVR image_path set to: /home/ultron/Downloads/Testing/test/RawriisSST/RawriisIcon.png (exists=True)
+19:50:52 [INFO] src.input.steamvr_input: SteamVR exe dir resolved to: /home/ultron/Downloads/Testing/test/RawriisSST
+19:50:52 [INFO] src.input.steamvr_input: Patched vrmanifest written
+19:50:52 [INFO] src.input.steamvr_input: SteamVRInputManager started
+19:51:25 [INFO] src.osc.vrchat_osc: OSC client connected to 127.0.0.1:9002
+19:52:12 [INFO] src.stt.whisper_stt: Loading Whisper model 'base' on cpu from /home/ultron/.cache/huggingface/hub/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66…
+19:52:12 [INFO] src.stt.whisper_stt: Whisper subprocess python: /home/ultron/Downloads/Testing/test/bin/python3
+19:52:14 [INFO] src.stt.whisper_stt: Whisper model loaded (subprocess pid=10659).
+19:52:14 [INFO] src.gui.main_window: Whisper model ready.
+19:52:15 [WARNING] src.stt.ptt_handler: PTT hook registration failed: You must be root to use this library on linux.
+On Linux the 'keyboard' library requires read access to /dev/input.
+Fix: add your user to the 'input' group —  sudo usermod -aG input $USER  — then log out and back in, or run the app as root.
+19:52:21 [ERROR] src.tts.polly_tts: Amazon Polly TTS error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/ultron/Downloads/Testing/test/RawriisSST/src/tts/polly_tts.py", line 132, in _speak_worker
+    resp = client.synthesize_speech(
+        Text=text,
+    ...<2 lines>...
+        Engine=engine,
+    )
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 200, in sign
+    auth.add_auth(request)
+    ~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/auth.py", line 429, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+19:52:38 [ERROR] src.tts.polly_tts: Amazon Polly TTS error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/ultron/Downloads/Testing/test/RawriisSST/src/tts/polly_tts.py", line 132, in _speak_worker
+    resp = client.synthesize_speech(
+        Text=text,
+    ...<2 lines>...
+        Engine=engine,
+    )
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 200, in sign
+    auth.add_auth(request)
+    ~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/auth.py", line 429, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+19:52:40 [ERROR] src.tts.polly_tts: Amazon Polly TTS error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/ultron/Downloads/Testing/test/RawriisSST/src/tts/polly_tts.py", line 132, in _speak_worker
+    resp = client.synthesize_speech(
+        Text=text,
+    ...<2 lines>...
+        Engine=engine,
+    )
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 200, in sign
+    auth.add_auth(request)
+    ~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/auth.py", line 429, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+19:52:42 [ERROR] src.tts.polly_tts: Amazon Polly TTS error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/ultron/Downloads/Testing/test/RawriisSST/src/tts/polly_tts.py", line 132, in _speak_worker
+    resp = client.synthesize_speech(
+        Text=text,
+    ...<2 lines>...
+        Engine=engine,
+    )
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 200, in sign
+    auth.add_auth(request)
+    ~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/auth.py", line 429, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+19:52:43 [ERROR] src.tts.polly_tts: Amazon Polly TTS error: Unable to locate credentials
+Traceback (most recent call last):
+  File "/home/ultron/Downloads/Testing/test/RawriisSST/src/tts/polly_tts.py", line 132, in _speak_worker
+    resp = client.synthesize_speech(
+        Text=text,
+    ...<2 lines>...
+        Engine=engine,
+    )
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/signers.py", line 200, in sign
+    auth.add_auth(request)
+    ~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/ultron/Downloads/Testing/test/lib/python3.13/site-packages/botocore/auth.py", line 429, in add_auth
+    raise NoCredentialsError()
+botocore.exceptions.NoCredentialsError: Unable to locate credentials
+19:56:39 [INFO] src.stt.whisper_stt: Whisper model unloaded.
+19:57:03 [WARNING] src.stt.ptt_handler: PTT hook registration failed: You must be root to use this library on linux.
+On Linux the 'keyboard' library requires read access to /dev/input.
+Fix: add your user to the 'input' group —  sudo usermod -aG input $USER  — then log out and back in, or run the app as root.
+19:59:19 [WARNING] src.tts.elevenlabs_tts: ElevenLabs device prep failed for device RawriisCable: No input/output device matching 'RawriisCable'
+19:59:24 [WARNING] src.tts.elevenlabs_tts: ElevenLabs device prep failed for device RawriisCable: No input/output device matching 'RawriisCable'
+20:00:01 [WARNING] src.tts.elevenlabs_tts: ElevenLabs device prep failed for device RawriisCable: No input/output device matching 'RawriisCable'
+20:00:02 [WARNING] src.tts.elevenlabs_tts: ElevenLabs playback failed on device 3: Error opening OutputStream: Device unavailable [PaErrorCode -9985]
+20:00:06 [WARNING] src.tts.elevenlabs_tts: ElevenLabs device prep failed for device RawriisCable: No input/output device matching 'RawriisCable'
+20:00:07 [WARNING] src.tts.elevenlabs_tts: ElevenLabs device prep failed for device RawriisCable: No input/output device matching 'RawriisCable'
+20:00:07 [WARNING] src.tts.elevenlabs_tts: ElevenLabs playback failed on device 3: Error opening OutputStream: Device unavailable [PaErrorCode -9985]
+20:00:08 [WARNING] src.tts.elevenlabs_tts: ElevenLabs playback failed on device 3: Error opening OutputStream: Device unavailable [PaErrorCode -9985]
+20:00:47 [WARNING] src.tts.elevenlabs_tts: ElevenLabs device prep failed for device RawriisCable: No input/output device matching 'RawriisCable'
+20:00:48 [WARNING] src.tts.elevenlabs_tts: ElevenLabs playback failed on device 3: Error opening OutputStream: Device unavailable [PaErrorCode -9985]
